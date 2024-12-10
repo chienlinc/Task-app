@@ -1,0 +1,41 @@
+{
+    "name": "express-app",
+    "version": "1.0.0",
+    "main": "server.js",
+    "scripts": {
+        "dev": "nodemon server.js",
+        "format": "prettier --write .",
+        "start": "pm2 start server.js --name todo-app",
+        "stop": "pm2 stop todo-app",
+        "delete": "pm2 delete todo-app",
+        "restart": "pm2 restart todo-app",
+        "logs": "pm2 logs todo-app",
+        "status": "pm2 status",
+        "runtime": "pm2-runtime server.js --name todo-app",
+        "deploy": "docker build -f Dockerfile.node -t ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} . && docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}",
+        "launch": "docker run --name todo-express -d -p 3000:3000 ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+    },
+    "type": "module",
+    "keywords": [
+        "express",
+        "node.js",
+        "mongoDB",
+        "docker",
+        "pm2",
+        "api"
+    ],
+    "author": "Jenny",
+    "license": "ISC",
+    "description": "A simple Express application connected to MongoDB, managed with PM2, and deployable via Docker.",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "mongoose": "^8.8.2",
+        "pm2": "^5.4.3"
+    },
+    "devDependencies": {
+        "dotenv": "^16.4.5",
+        "nodemon": "^3.1.7",
+        "prettier": "^3.4.2"
+    }
+}

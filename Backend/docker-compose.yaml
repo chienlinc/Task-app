@@ -1,0 +1,65 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    container_name: todo-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    ports:
+      - '27017:27017'
+    volumes:
+      - todo_mongo_data:/data/db
+    healthcheck:
+      test: ['CMD', 'mongosh', '--eval', 'db.runCommand({ ping: 1 })']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  app1:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    environment:
+      - APP_NAME=App1
+      - APP_PORT=${APP_PORT}
+      - MONGO_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@todo-mongo:27017/${MONGO_DB_NAME}?authSource=admin
+    ports:
+      - '3001:${APP_PORT}'
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+  app2:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    environment:
+      - APP_NAME=App2
+      - APP_PORT=${APP_PORT}
+      - MONGO_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@todo-mongo:27017/${MONGO_DB_NAME}?authSource=admin
+    ports:
+      - '3002:${APP_PORT}'
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - '8080:8080'
+    depends_on:
+      app1:
+        condition: service_started
+      app2:
+        condition: service_started
+    restart: always
+
+volumes:
+  todo_mongo_data:
+
+networks:
+  default:
+    name: todo_network

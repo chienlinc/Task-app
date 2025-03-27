@@ -14,7 +14,7 @@ const initialTasks = {
 
 const taskReducer = (state, action) => {
   switch (action.type) {
-    case 'TASL_START':
+    case 'TASK_START':
       return { ...state, loading: true };
     case 'TASK_END':
       return { ...state, loading: false };

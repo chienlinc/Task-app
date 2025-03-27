@@ -4,6 +4,8 @@ A modern React single-page application built with Webpack and Docker for streaml
 
 The backend is a robust Express.js application connected to MongoDB and managed with PM2 to ensure stability, scalability, and process management. The entire application is containerized using Docker and orchestrated with Docker Compose for easy deployment and scalability.  
 
+Additionally, for scalable and resilient production environments, the app can be deployed and managed using Kubernetes, allowing for efficient orchestration and management of containerized services.
+
 ## Technologies Used
 
 #### Frontend Technologies
@@ -117,6 +119,27 @@ This application allows users to create, manage, and track tasks in a simple, ef
         ---
         **_Alternatively:_**  Create a Docker network, run the Express app and MongoDB containers, and connect them to the network manually if needed.
 
+## Kubernetes (Minikube)
+
+- Deployments: Manages stateless applications.  
+- StatefulSet: Manages stateful applications.  
+- Services: Exposes and load-balances traffic to Pods.  
+- ConfigMaps: Stores non-sensitive configuration data.    
+- Secrets: Stores sensitive data.  
+- Ingress: Manages external HTTP access to services within the cluster.  
+
+1. Apply the YAML configuration
+
+    ```bash
+    kubectl apply -f K8s/
+    ```
+
+2. Edit the /etc/hosts file and run Minikube tunnel
+
+    ```bash
+    minikube tunnel
+    ```
+
 ## Reference
 
 Express.js: https://expressjs.com/en/4x/api.html#express  
@@ -133,3 +156,5 @@ Axios: https://axios-http.com/docs/interceptors
 Babel: https://babeljs.io/docs/presets  
 Eslint: https://eslint.org/docs/latest/rules/  
 Prettier: https://prettier.io/docs/en/options  
+Kubernetes: https://www.youtube.com/watch?v=X48VuDVv0do  
+Ingress: https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/  

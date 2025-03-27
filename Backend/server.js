@@ -8,7 +8,7 @@ const app = express();
 
 const APP_NAME = process.env.APP_NAME;
 const PORT = process.env.APP_PORT;
-const MONGO_URI = process.env.MONGO_URI;
+const MONGO_URI = `mongodb://${process.env.USER_NAME}:${process.env.USER_PWD}@${process.env.DB_URL}`
 
 app.use(express.json());
 app.use(

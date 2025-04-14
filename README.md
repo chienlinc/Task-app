@@ -29,6 +29,9 @@ Nginx: Acts as a reverse proxy for back-end services.
 Docker: Containerizes the back-end application for deployment.  
 Docker Compose: Orchestrates multi-container Docker applications, including Express, MongoDB, and Nginx.  
 
+#### Container Orchestration and Deployment
+Kubernetes (Minikube): Manages the deployment, scaling, and operation of containerized applications, ensuring reliability and availability across clusters.  
+
 ## Application Overview
 
 This application allows users to create, manage, and track tasks in a simple, efficient interface.
@@ -158,3 +161,6 @@ Eslint: https://eslint.org/docs/latest/rules/
 Prettier: https://prettier.io/docs/en/options  
 Kubernetes: https://www.youtube.com/watch?v=X48VuDVv0do  
 Ingress: https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/  
+Prometheus: https://prometheus.io/docs/prometheus/latest/installation/  
+Grafana: https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/  
+Elastic Stack: https://www.elastic.co/blog/getting-started-with-the-elastic-stack-and-docker-compose  
